@@ -1,4 +1,6 @@
 //this file contains the functions of the app
+const Movie = require("../models/item");
+
 exports.getItem = (req, res, next) => {
     res.status(200).json({mss:"success"})
 }; 
@@ -63,12 +65,12 @@ exports.getMovie = (req, res, next) => {
   
   }
   
-  exports.getMovieById = (req, res, next) => {
-          res.render("movies/edit", {id: 1, title: Suffragette
-          }
-          )
-  }
-  
+exports.getMovieById = (req, res, next) => {
+      res.render("movies/edit", {id: 1, title: Suffragette
+      }
+      )
+}
+
 
   /*
   exports.deletingMovie = (req, res, next) => {
@@ -79,25 +81,25 @@ exports.getMovie = (req, res, next) => {
   }
   */
 
-  exports.deleteMovie = (req, res, next) => {
-    let user = req.user;
-    Note.findByIdAndDelete(req.params.id, ()=>{
-      if (err) {
-        console.log(err);
-      } else {
-        user.movie.pull(req.params.id); //we removed the element from the arr
-        user.save(); //we should save now
-        console.log('User has been saved');
-        //TBD is that my file is To be defined, i havent one yet
-        res.render('views/TBD.hbs')
-      }
-    });
-    req.user.movie;
+exports.deleteMovie = (req, res, next) => {
+let user = req.user;
+Movie.findByIdAndDelete(req.params.id, ()=>{
+  if (err) {
+    console.log(err);
+  } else {
+    user.movie.pull(req.params.id); //we removed the element from the arr
+    user.save(); //we should save now
+    console.log('User has been saved');
+    //TBD is that my file is To be defined, i havent one yet
+    res.status(200); //CHANGE ME
   }
-  
-  
-  exports.createGreeting = (req, res, next) => {
-          res.send('<h1>Movies available</h1>');
-  }
+});
+// req.user.movie;
+}
+
+
+exports.createGreeting = (req, res, next) => {
+      res.send('<h1>Movies available</h1>');
+}
   
  

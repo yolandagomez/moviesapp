@@ -6,11 +6,9 @@ const movieSchema = new Schema({
         type: String,
         required: [true, "A movie needs a name"]
     },
-    image: {
-        String, 
-    }
+    image: String
 });
 
-const movie = mongoose.model("Movie", movieSchema);
+const Movie = mongoose.model("Movie", movieSchema);
 
 module.exports = Movie;
