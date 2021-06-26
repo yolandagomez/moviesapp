@@ -1,12 +1,31 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const movieSchema = new Schema({
-    name: {
+    category: {
         type: String,
         required: [true, "A movie needs a name"]
     },
-    image: String
+    poster: {
+        type: String,
+        required: [true]
+    },
+    title: {
+        type: String,
+        required: [true]
+    },
+    plot: {
+        type: String,
+        required: [true]
+    },
+    year : {
+        type: Number,
+        required: [true]
+    },
+    rating: 
+        Number //a number but is a double
+        //unique: true <- 
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

@@ -10,14 +10,17 @@ const router = express.Router();
 /* GET home page. */
 
 
+router.get('/auth/register', (req, res) => {
+    res.render('register.ejs');
+});
 
-router.get('/id', movieController.allMovies);
+router.get('/:id', movieController.allMovies);
 
 router.post('/',  movieController.addMovie);
 
-router.get('/id',  movieController.getMovie);
+router.get('/:id',  movieController.getMovie); // wrong
 
-router.get('/id', movieController.getMovieById);
+router.get('/:id', movieController.getMovieById); // wrong
 
 router.delete('/id', movieController.deleteMovie);
 

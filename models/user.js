@@ -12,7 +12,7 @@ const userSchema = new Schema({
     email: {
         required: true,
         type: String,
-        match: [/^\S+@\S+\.\S+$/, 'Not a valid email format.'],
+        match: [/^\S+@\S+\.\S+$/, 'Not a valid email format.'], //debe incluir alguno de esos caracteres 
         unique: true
     },
     notes: {
