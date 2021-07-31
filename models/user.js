@@ -10,16 +10,16 @@ const crypto = require('crypto'); // a native module of Node
 const userSchema = new Schema({
     name: String,
     email: {
-        required: true,
+        required: [true, 'an email is required'],
         type: String,
         match: [/^\S+@\S+\.\S+$/, 'Not a valid email format.'], //debe incluir alguno de esos caracteres 
         unique: true
     },
-    notes: {
+    favorites: { //one to many relation modelling => by reference
         type: [{
             type: Schema.Types.ObjectId,
-            ref: "Note", //it should match to the notes file
-            default: [] //it will look better
+            ref: "Movie", //it should match to the movie file
+            default: [] //bc at the beginning the user doesn't have anything
         }],
     hash: String,
     salt: String
@@ -31,6 +31,7 @@ userSchema.methods.createHash = (password) => {
     this.salt = crypto.randomBytes(16).toString('hex'); //we're usgin the user that is already in the session of passport / we create a hash with a method of generating a random byte/ hex is for encoding it in hexadecimanl
     this.hash = crypto.pbkdf2Sync(password, this.salt, 4000, 64, 'SHA512').toString('hex');  //pbkdf2Sync is a mathematical thing // the nr 4000 is the nr of iterations/ 64 is the nr of digits
 }; //creating a new method for that entity
+
 userSchema.methods.validatePassword = (password) => {
     let temporaryHashforCheck = crypto.pbkdf2Sync(password, this.salt, 4000, 64, 'SHA512').toString('hex');
     return hash === this.hash; // it will return true or false
